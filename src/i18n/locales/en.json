@@ -1,0 +1,71 @@
+{
+    "auth": {
+        "login": "Sign In",
+        "register": "Register",
+        "guest": "Play as Guest",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "nickname": "Nickname",
+        "signInWithGoogle": "Sign in with Google",
+        "signOut": "Sign Out",
+        "continueAsGuest": "Continue Without Registration",
+        "alreadyHaveAccount": "Already have an account?",
+        "dontHaveAccount": "Don't have an account?",
+        "forgotPassword": "Forgot Password",
+        "createAccount": "Create Account",
+        "welcome": "Welcome",
+        "welcomeBack": "Welcome Back"
+    },
+    "validation": {
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Please enter a valid email address",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Password must be at least 6 characters",
+        "passwordMismatch": "Passwords do not match",
+        "nicknameRequired": "Nickname is required",
+        "nicknameMinLength": "Nickname must be at least 3 characters",
+        "nicknameMaxLength": "Nickname can be at most 20 characters"
+    },
+    "errors": {
+        "authFailed": "Authentication failed",
+        "emailInUse": "This email address is already in use",
+        "invalidCredentials": "Invalid email or password",
+        "networkError": "Network error. Please try again",
+        "unknownError": "An unknown error occurred"
+    },
+    "common": {
+        "loading": "Loading...",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "close": "Close",
+        "confirm": "Confirm",
+        "or": "or",
+        "characters": "characters"
+    },
+    "theme": {
+        "dark": "Dark Theme",
+        "light": "Light Theme",
+        "toggle": "Toggle Theme"
+    },
+    "language": {
+        "turkish": "Türkçe",
+        "english": "English",
+        "select": "Select Language"
+    },
+    "nickname": {
+        "title": "Choose Your Nickname",
+        "description": "You must choose a nickname before starting the game",
+        "placeholder": "Enter your nickname",
+        "submit": "Continue"
+    },
+    "guest": {
+        "title": "Guest Login",
+        "description": "You can play as a guest, but your progress will not be saved.",
+        "upgrade": "You can link your account with email later",
+        "continue": "Continue as Guest"
+    }
+}

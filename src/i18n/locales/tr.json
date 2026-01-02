@@ -1,0 +1,71 @@
+{
+    "auth": {
+        "login": "Giriş Yap",
+        "register": "Kayıt Ol",
+        "guest": "Misafir Olarak Oyna",
+        "email": "E-posta",
+        "password": "Şifre",
+        "confirmPassword": "Şifreyi Onayla",
+        "nickname": "Takma Ad",
+        "signInWithGoogle": "Google ile Giriş Yap",
+        "signOut": "Çıkış Yap",
+        "continueAsGuest": "Kayıtsız Devam Et",
+        "alreadyHaveAccount": "Zaten hesabınız var mı?",
+        "dontHaveAccount": "Hesabınız yok mu?",
+        "forgotPassword": "Şifremi Unuttum",
+        "createAccount": "Hesap Oluştur",
+        "welcome": "Hoş Geldiniz",
+        "welcomeBack": "Tekrar Hoş Geldiniz"
+    },
+    "validation": {
+        "emailRequired": "E-posta adresi gereklidir",
+        "emailInvalid": "Geçerli bir e-posta adresi girin",
+        "passwordRequired": "Şifre gereklidir",
+        "passwordMinLength": "Şifre en az 6 karakter olmalıdır",
+        "passwordMismatch": "Şifreler eşleşmiyor",
+        "nicknameRequired": "Takma ad gereklidir",
+        "nicknameMinLength": "Takma ad en az 3 karakter olmalıdır",
+        "nicknameMaxLength": "Takma ad en fazla 20 karakter olabilir"
+    },
+    "errors": {
+        "authFailed": "Kimlik doğrulama başarısız oldu",
+        "emailInUse": "Bu e-posta adresi zaten kullanımda",
+        "invalidCredentials": "Geçersiz e-posta veya şifre",
+        "networkError": "Ağ hatası. Lütfen tekrar deneyin",
+        "unknownError": "Bilinmeyen bir hata oluştu"
+    },
+    "common": {
+        "loading": "Yükleniyor...",
+        "submit": "Gönder",
+        "cancel": "İptal",
+        "save": "Kaydet",
+        "delete": "Sil",
+        "edit": "Düzenle",
+        "close": "Kapat",
+        "confirm": "Onayla",
+        "or": "veya",
+        "characters": "karakter"
+    },
+    "theme": {
+        "dark": "Koyu Tema",
+        "light": "Açık Tema",
+        "toggle": "Tema Değiştir"
+    },
+    "language": {
+        "turkish": "Türkçe",
+        "english": "English",
+        "select": "Dil Seçin"
+    },
+    "nickname": {
+        "title": "Takma Adınızı Belirleyin",
+        "description": "Oyuna başlamadan önce bir takma ad seçmelisiniz",
+        "placeholder": "Takma adınızı girin",
+        "submit": "Devam Et"
+    },
+    "guest": {
+        "title": "Misafir Girişi",
+        "description": "Misafir olarak oynayabilirsiniz, ancak ilerlemeleriniz kaydedilmeyecektir.",
+        "upgrade": "Hesabınızı daha sonra e-posta ile bağlayabilirsiniz",
+        "continue": "Misafir Olarak Devam Et"
+    }
+}
