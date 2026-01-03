@@ -4,7 +4,7 @@ import { ref, set, onValue, remove, get, push, update } from 'firebase/database'
 import { db } from '../config/firebase';
 import { useAuth } from '../contexts/AuthContext';
 import MainLayout from '../components/layout/MainLayout';
-import { Bot, User, Sword, Shield, Heart, Skull, Scroll, MessageSquare, Send } from 'lucide-react';
+import { User, Shield, Scroll } from 'lucide-react';
 
 // --- Icons & Components ---
 const DiceIcon = ({ sides, className = "w-6 h-6" }: { sides: number, className?: string }) => {
