@@ -10,6 +10,7 @@ import CreateRoomPage from './pages/CreateRoomPage';
 import LobbyPage from './pages/LobbyPage';
 import SpyfallPage from './pages/SpyfallPage';
 import GamePage from './pages/GamePage';
+import DNDGamePage from './pages/DNDGamePage';
 
 // Güvenlik Görevlisi: Giriş yapmamışsa Login'e atar
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
@@ -46,6 +47,12 @@ function App() {
             <Route path="/spyfall" element={
               <PrivateRoute>
                 <SpyfallPage />
+              </PrivateRoute>
+            } />
+
+            <Route path="/dnd-game" element={
+              <PrivateRoute>
+                <DNDGamePage />
               </PrivateRoute>
             } />
 

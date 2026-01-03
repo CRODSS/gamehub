@@ -86,24 +86,39 @@ const HomePage: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Placeholder Card (Coming Soon) */}
-                        <div className="flex flex-col items-start justify-between bg-gray-50 dark:bg-gray-800/20 opacity-75 grayscale rounded-3xl p-6 shadow-sm ring-1 ring-gray-900/5 dark:ring-white/5 cursor-not-allowed">
+                        {/* D&D Game Card */}
+                        <div
+                            onClick={() => navigate('/dnd-game')}
+                            className="flex flex-col items-start justify-between bg-white dark:bg-gray-800/50 backdrop-blur-lg rounded-3xl p-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-white/10 hover:ring-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer group"
+                        >
                             <div className="relative w-full">
-                                <div className="aspect-[16/9] w-full rounded-2xl bg-gray-200 dark:bg-gray-700 flex items-center justify-center sm:aspect-[2/1] lg:aspect-[3/2]">
-                                    <span className="text-4xl">🎲</span>
+                                <div className="aspect-[16/9] w-full rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center sm:aspect-[2/1] lg:aspect-[3/2] group-hover:scale-105 transition-transform duration-500">
+                                    <span className="text-6xl">🐉</span>
+                                </div>
+                                <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                                <div className="absolute top-0 right-0 p-2">
+                                    <span className="inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-xs font-medium text-green-400 ring-1 ring-inset ring-green-400/20 backdrop-blur-md">Yeni ✨</span>
                                 </div>
                             </div>
-                            <div className="max-w-xl w-full">
+                            <div className="max-w-xl">
                                 <div className="mt-8 flex items-center gap-x-4 text-xs">
-                                    <span className="text-gray-400">Parti</span>
-                                    <span className="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1.5 font-medium text-gray-500">Çok Yakında</span>
+                                    <span className="text-gray-500 dark:text-gray-400">RPG</span>
+                                    <span className="relative z-10 rounded-full bg-gray-50 dark:bg-gray-700 px-3 py-1.5 font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">2-8 Oyuncu</span>
                                 </div>
-                                <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-500 dark:text-gray-500">
-                                    Yeni Oyunlar
-                                </h3>
-                                <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-500 dark:text-gray-600">
-                                    Daha fazla eğlenceli parti oyunu çok yakında burada olacak. Takipte kalın!
-                                </p>
+                                <div className="group relative">
+                                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-white group-hover:text-purple-400 transition-colors">
+                                        <span className="absolute inset-0" />
+                                        D&D Macera
+                                    </h3>
+                                    <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                                        Metin tabanlı çok oyunculu RPG deneyimi. Dungeon Master olarak macera yarat veya oyuncu olarak efsanevi maceralara katıl.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="mt-8 w-full">
+                                <div className="w-full rounded-xl bg-purple-600/10 dark:bg-purple-900/20 py-3 text-center text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                                    Maceraya Başla →
+                                </div>
                             </div>
                         </div>
                     </div>

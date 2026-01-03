@@ -3,7 +3,10 @@ import {
     signInWithPopup,
     signInAnonymously,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile as updateAuthProfile
 } from 'firebase/auth';
 import { ref, set, get, serverTimestamp } from 'firebase/database';
 import { auth, googleProvider, db } from '../config/firebase';
@@ -14,6 +17,8 @@ interface AuthContextType {
     loading: boolean;
     loginWithGoogle: () => Promise<void>;
     loginAsGuest: (nickname: string) => Promise<void>;
+    loginWithEmail: (email: string, pass: string) => Promise<void>;
+    registerWithEmail: (email: string, pass: string, nickname: string) => Promise<void>;
     logout: () => Promise<void>;
     updateProfile: (data: Partial<UserProfile>) => Promise<void>;
 }
@@ -29,27 +34,45 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Uygulama açıldığında oturum kontrolü yap
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-            if (firebaseUser) {
-                // Kullanıcı giriş yapmış, veritabanından profilini çek
-                const userRef = ref(db, `users/${firebaseUser.uid}`);
-                const snapshot = await get(userRef);
+            try {
+                if (firebaseUser) {
+                    // Kullanıcı giriş yapmış, veritabanından profilini çek
+                    const userRef = ref(db, `users/${firebaseUser.uid}`);
 
-                if (snapshot.exists()) {
-                    setUser(snapshot.val());
+                    try {
+                        const snapshot = await get(userRef);
+
+                        if (snapshot.exists()) {
+                            setUser(snapshot.val());
+                        } else {
+                            // Profil yoksa (örn: Google ile ilk giriş), temel profil oluştur
+                            const newUser: UserProfile = {
+                                uid: firebaseUser.uid,
+                                nickname: firebaseUser.displayName || 'Misafir',
+                                avatarUrl: firebaseUser.photoURL || undefined,
+                                isGuest: firebaseUser.isAnonymous,
+                                stats: { gamesPlayed: 0, wins: 0 }
+                            };
+                            // Veritabanına kaydet
+                            await set(userRef, { ...newUser, lastSeen: serverTimestamp() });
+                            setUser(newUser);
+                        }
+                    } catch (dbError) {
+                        console.error('Database access failed, using fallback:', dbError);
+                        // Fallback: DB erişimi yoksa bile state'i güncelle ki giriş yapılabilsin
+                        setUser({
+                            uid: firebaseUser.uid,
+                            nickname: firebaseUser.displayName || 'Oyuncu',
+                            isGuest: firebaseUser.isAnonymous,
+                            stats: { gamesPlayed: 0, wins: 0 } // Dummy stats
+                        });
+                    }
                 } else {
-                    // Profil yoksa (örn: Google ile ilk giriş), temel profil oluştur
-                    const newUser: UserProfile = {
-                        uid: firebaseUser.uid,
-                        nickname: firebaseUser.displayName || 'Misafir',
-                        avatarUrl: firebaseUser.photoURL || undefined,
-                        isGuest: firebaseUser.isAnonymous,
-                        stats: { gamesPlayed: 0, wins: 0 }
-                    };
-                    // Veritabanına kaydet
-                    await set(userRef, { ...newUser, lastSeen: serverTimestamp() });
-                    setUser(newUser);
+                    setUser(null);
                 }
-            } else {
+            } catch (err) {
+                console.error('Auth state change error:', err);
+                setUser(null);
                 setUser(null);
             }
             setLoading(false);
@@ -88,6 +111,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    const loginWithEmail = async (email: string, pass: string) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, pass);
+        } catch (error) {
+            console.error("Email Login Hatası:", error);
+            throw error;
+        }
+    };
+
+    const registerWithEmail = async (email: string, pass: string, nickname: string) => {
+        try {
+            const result = await createUserWithEmailAndPassword(auth, email, pass);
+            await updateAuthProfile(result.user, { displayName: nickname });
+
+            const newUser: UserProfile = {
+                uid: result.user.uid,
+                nickname: nickname,
+                isGuest: false,
+                stats: { gamesPlayed: 0, wins: 0 }
+            };
+
+            const userRef = ref(db, `users/${result.user.uid}`);
+            await set(userRef, { ...newUser, createdAt: serverTimestamp() });
+            // setUser will be handled by onAuthStateChanged
+        } catch (error) {
+            console.error("Register Hatası:", error);
+            throw error;
+        }
+    };
+
     const logout = async () => {
         await signOut(auth);
         setUser(null);
@@ -104,7 +157,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, loginWithGoogle, loginAsGuest, logout, updateProfile }}>
+        <AuthContext.Provider value={{
+            user,
+            loading,
+            loginWithGoogle,
+            loginAsGuest,
+            loginWithEmail,
+            registerWithEmail,
+            logout,
+            updateProfile
+        }}>
             {children}
         </AuthContext.Provider>
     );
