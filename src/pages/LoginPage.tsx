@@ -169,7 +169,15 @@ export default function LoginPage() {
                     </div>
 
                     <button
-                        onClick={loginWithGoogle}
+                        onClick={async () => {
+                            try {
+                                await loginWithGoogle();
+                            } catch (err: any) {
+                                if (err.code === 'auth/popup-closed-by-user') return; // Kullanıcı kapattıysa hata verme
+                                if (err.code === 'auth/unauthorized-domain') setError('Bu domain (localhost) Firebase ayarlarında yetkili değil.');
+                                else setError('Google girişi başarısız: ' + err.message);
+                            }
+                        }}
                         className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold py-3 px-4 rounded-xl transition-all duration-200 mb-4"
                     >
                         <img src="https://www.google.com/favicon.ico" alt="Google" className="w-5 h-5" />
